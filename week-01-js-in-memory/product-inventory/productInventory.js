@@ -58,7 +58,7 @@ else{
 
 function updateProduct(products, id, updates) {
 const product=products.find((product)=>product.id===id)
-if(!getProduct){
+if(!product){
     return "Product not found"; 
 }
 Object.assign(product,updates)
