@@ -43,3 +43,15 @@ const newProduct = {
 
 console.log(addProduct(products,newProduct));
 console.log(products)
+
+
+function findProductById(products, id) {
+const getProduct=products.find((product)=>product.id===id)
+if (getProduct){
+    return getProduct
+}
+else{
+    return "product not found"
+}
+
+}
