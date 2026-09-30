@@ -63,3 +63,14 @@ if(!product){
 }
 Object.assign(product,updates)
 }
+
+function deleteProduct(products, id) {
+  const updatedProducts = products.filter(
+    (product) => product.id !== id
+  );
+  if (updatedProducts.length === products.length) {
+return "product casnnot be deleted"
+}
+return updatedProducts
+
+}
