@@ -55,3 +55,11 @@ else{
 }
 
 }
+
+function updateProduct(products, id, updates) {
+const product=products.find((product)=>product.id===id)
+if(!getProduct){
+    return "Product not found"; 
+}
+Object.assign(product,updates)
+}
