@@ -74,3 +74,29 @@ return "product casnnot be deleted"
 return updatedProducts
 
 }
+
+function addProduct(products, newProduct) {
+  if (!newProduct.name.trim()) {
+    return "Invalid product name";
+  }
+
+  if (newProduct.price <= 0) {
+    return "Invalid product price";
+  }
+
+  if (newProduct.stock < 0) {
+    return "Invalid product stock";
+  }
+
+  const duplicate = products.some(
+    (product) => product.id === newProduct.id
+  );
+
+  if (duplicate) {
+    return "Product with this ID already exists";
+  }
+
+  products.push(newProduct);
+
+  return products;
+}
