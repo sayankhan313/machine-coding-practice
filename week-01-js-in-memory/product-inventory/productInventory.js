@@ -100,3 +100,63 @@ function addProduct(products, newProduct) {
 
   return products;
 }
+// 1. Valid product add
+console.log(
+  addProduct(products, {
+    id: 3,
+    name: "Keyboard",
+    price: 70,
+    stock: 8
+  })
+);
+
+// 2. Duplicate ID
+console.log(
+  addProduct(products, {
+    id: 2,
+    name: "Monitor",
+    price: 200,
+    stock: 5
+  })
+);
+
+// 3. Find existing product
+console.log(findProductById(products, 1));
+
+// 4. Find missing product
+console.log(findProductById(products, 99));
+
+// 5. Delete missing product
+console.log(deleteProduct(products, 99));
+
+
+
+
+
+
+  function validateProduct(product) {
+  return (
+    product.name.trim() !== "" &&
+    product.price > 0 &&
+    product.stock >= 0
+  );
+}
+
+
+function addProduct(products, newProduct) {
+if(!validateProduct(newProduct)){
+return "product does not have valid input"
+}
+
+  const duplicate = products.some(
+    (product) => product.id === newProduct.id
+  );
+
+  if (duplicate) {
+    return "Product with this ID already exists";
+  }
+
+  products.push(newProduct);
+
+  return products;
+}
