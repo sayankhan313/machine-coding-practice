@@ -20,6 +20,8 @@ app.get("/", (req, res) => {
 // TODO: GET /products
 // Return all products.
 
+app.get("/products")
+
 // TODO: GET /products/:id
 // Find product using route parameter.
 // Return 404 if product does not exist.
