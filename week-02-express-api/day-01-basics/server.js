@@ -17,10 +17,26 @@ app.get("/", (req, res) => {
   });
 });
 
-// TODO: GET /products
-// Return all products.
+app.get("/products/:id", (req, res) => {
+  const id = Number(req.params.id);
 
-app.get("/products")
+  const product = products.find(
+    (product) => product.id === id
+  );
+
+  if (!product) {
+    return res.status(404).json({
+      success: false,
+      error: "Product not found"
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    data: product
+  });
+});
+
 
 // TODO: GET /products/:id
 // Find product using route parameter.
