@@ -49,6 +49,13 @@ app.get("/health", (req, res) => {
     status: "ok"
   });
 });
+
+app.get("/products/count", (req, res) => {
+  res.status(200).json({
+    success: true,
+    count: products.length
+  });
+});
 // TODO: GET /products/:id
 // Find product using route parameter.
 // Return 404 if product does not exist.
