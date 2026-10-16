@@ -43,6 +43,12 @@ if (Number.isNaN(id)) {
     error: "Product ID must be a number"
   });
 }
+
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    status: "ok"
+  });
+});
 // TODO: GET /products/:id
 // Find product using route parameter.
 // Return 404 if product does not exist.
