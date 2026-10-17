@@ -56,6 +56,35 @@ app.get("/products/count", (req, res) => {
     count: products.length
   });
 });
+
+
+
+app.get("/products", (req, res) => {
+  const { minPrice } = req.query;
+
+  if (minPrice === undefined) {
+    return res.status(200).json(products);
+  }
+
+  const min = Number(minPrice);
+
+  if (
+    minPrice.trim() === "" ||
+    !Number.isFinite(min) ||
+    min < 0
+  ) {
+    return res.status(400).json({
+      success: false,
+      error: "minPrice must be a non-negative number"
+    });
+  }
+
+  const filteredProducts = products.filter(
+    (product) => product.price >= min
+  );
+
+  return res.status(200).json(filteredProducts);
+});
 // TODO: GET /products/:id
 // Find product using route parameter.
 // Return 404 if product does not exist.
