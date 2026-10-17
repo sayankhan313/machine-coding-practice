@@ -89,6 +89,58 @@ app.get("/products", (req, res) => {
 // Find product using route parameter.
 // Return 404 if product does not exist.
 
+app.get("/products", (req, res) => {
+  const { minPrice, maxPrice } = req.query;
+
+  let min = null;
+  let max = null;
+
+  if (minPrice !== undefined) {
+    min = Number(minPrice);
+
+    if (
+      minPrice.trim() === "" ||
+      !Number.isFinite(min) ||
+      min < 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid minimum price"
+      });
+    }
+  }
+
+  if (maxPrice !== undefined) {
+    max = Number(maxPrice);
+
+    if (
+      maxPrice.trim() === "" ||
+      !Number.isFinite(max) ||
+      max < 0
+    ) {
+      return res.status(400).json({
+        success: false,
+        error: "Invalid maximum price"
+      });
+    }
+  }
+
+  if (min !== null && max !== null && min > max) {
+    return res.status(400).json({
+      success: false,
+      error: "Minimum price cannot exceed maximum price"
+    });
+  }
+
+  const filteredProducts = products.filter((product) => {
+    if (min !== null && product.price < min) return false;
+    if (max !== null && product.price > max) return false;
+
+    return true;
+  });
+
+  return res.status(200).json(filteredProducts);
+});
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
